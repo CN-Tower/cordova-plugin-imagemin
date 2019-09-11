@@ -53,6 +53,23 @@ public class ImageMin extends CordovaPlugin {
 
     private Bitmap base64ToBitmap(String base64String) {
         byte[] bytes = Base64.decode(base64String, Base64.NO_WRAP);
+        if (options != null && options.has("bitmapConfig")) {
+            Bitmap.Config bitmapConfig = null;
+            try {
+                switch (options.getString("bitmapConfig")) {
+                    case "RGB_565": bitmapConfig = Bitmap.Config.RGB_565; break;
+                    case "ARGB_8888": bitmapConfig = Bitmap.Config.ARGB_8888; break;
+                    case "ARGB_4444": bitmapConfig = Bitmap.Config.ARGB_4444; break;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (bitmapConfig != null) {
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inPreferredConfig = bitmapConfig;
+                return BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+            }
+        }
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 

@@ -36,8 +36,9 @@ const imgData = `/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAg
  *                            If it starts with such prefix, please remove the prefix first.
  *
  * @param options: {
- *    encodeQuality: number;          [0-100], default 60
- *    outputImgType: 'jpeg' | 'png';  default 'jpeg'
+ *    bitmapConfig:  'ARGB_8888' | 'ARGB_4444' | 'RGB_565';   default null
+ *    encodeQuality: number;                                  0-100, default 60
+ *    outputImgType: 'jpeg' | 'png';                          default 'jpeg'
  * }
  *
  * @param success: (res: { data: string }) => void;  The callback param `data` is olso a image base64 string.
@@ -45,7 +46,7 @@ const imgData = `/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAg
  * @param error (err: Error) => void;   Compress failed.
  *
  */
-imagemin.compress(imgBase64, ({ data }) => {
+imagemin.compress(imgBase64, { bitmapConfig: 'RGB_565', encodeQuality: 30 }, ({ data }) => {
   console.log(data);
 }, (err: any) => {
   console.error(err);
