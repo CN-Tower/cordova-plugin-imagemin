@@ -46,7 +46,7 @@ const imgData = `/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAg
  * @param error (err: Error) => void;   Compress failed.
  *
  */
-imagemin.compress(imgBase64, { bitmapConfig: 'RGB_565', encodeQuality: 30 }, ({ data }) => {
+imagemin.compress(imgBase64, { encodeQuality: 30 }, ({ data }) => {
   console.log(data);
 }, (err: any) => {
   console.error(err);

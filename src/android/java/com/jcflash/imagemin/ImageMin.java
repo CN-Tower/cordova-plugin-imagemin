@@ -6,14 +6,12 @@ import org.apache.cordova.CordovaPlugin;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 public class ImageMin extends CordovaPlugin {
 
@@ -26,29 +24,23 @@ public class ImageMin extends CordovaPlugin {
         if (action.equals("compress")) {
             String srcBase64 = args.getString(0);
             options = new JSONObject(args.getString(1));
-            compressImage(cordova.getContext(), srcBase64);
+            compressImage(srcBase64);
             return true;
         }
         return false;
     }
 
-    private void compressImage(Context context, String srcBase64) {
+    private void compressImage(String srcBase64) {
+        Bitmap imgBitmap = base64ToBitmap(srcBase64);
+        String resBase64 = bitmapToBase64(imgBitmap);
+        JSONObject json = new JSONObject();
         try {
-            Bitmap imgBitmap = base64ToBitmap(srcBase64);
-            String resBase64 = bitmapToBase64(resBitmap);
-            JSONObject json = new JSONObject();
-            try {
-                json.put("data", resBase64);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            Log.i("Response Data", json.toString());
-            callbackContext.success(json);
-        } catch (IOException e) {
+            json.put("data", resBase64);
+        } catch (JSONException e) {
             e.printStackTrace();
-            JSONObject error = new JSONObject();
-            callbackContext.error(error);
         }
+        Log.i("Response Data", json.toString());
+        callbackContext.success(json);
     }
 
     private Bitmap base64ToBitmap(String base64String) {
@@ -76,7 +68,7 @@ public class ImageMin extends CordovaPlugin {
     private String bitmapToBase64(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Bitmap.CompressFormat imageType = Bitmap.CompressFormat.JPEG;
-        Integer encodeQuality = 80;
+        Integer encodeQuality = 60;
         if (options != null && options.has("outputImgType")) {
             try {
                 String imgType = options.getString("outputImgType");
@@ -87,7 +79,7 @@ public class ImageMin extends CordovaPlugin {
                 e.printStackTrace();
             }
         }
-        Log.i("Image Type", json.toString());
+        Log.i("Image Type", imageType.toString());
         if (options != null && options.has("encodeQuality")) {
             try {
                 Integer quality = options.getInt("encodeQuality");
