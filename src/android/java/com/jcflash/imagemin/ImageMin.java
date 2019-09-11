@@ -48,10 +48,13 @@ public class ImageMin extends CordovaPlugin {
         if (options != null && options.has("bitmapConfig")) {
             Bitmap.Config bitmapConfig = null;
             try {
-                switch (options.getString("bitmapConfig")) {
-                    case "RGB_565": bitmapConfig = Bitmap.Config.RGB_565; break;
-                    case "ARGB_8888": bitmapConfig = Bitmap.Config.ARGB_8888; break;
-                    case "ARGB_4444": bitmapConfig = Bitmap.Config.ARGB_4444; break;
+                String config = options.getString("bitmapConfig");
+                if (config.equals("RGB_565")) {
+                    bitmapConfig = Bitmap.Config.RGB_565;
+                } else if (config.equals("ARGB_8888")) {
+                    bitmapConfig = Bitmap.Config.ARGB_8888;
+                } else if (config.equals("ARGB_4444")) {
+                    bitmapConfig = Bitmap.Config.ARGB_4444;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
