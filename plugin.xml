@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-imagemin" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>imagemin</name>
+
+    <js-module name="imagemin" src="www/imagemin.js">
+        <clobbers target="window.imagemin" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">  
+            <feature name="ImageMin">
+                <param name="android-package" value="com.jcflash.imagemin.ImageMin" />
+            </feature>  
+        </config-file> 
+
+        <source-file src="src/android/java/com/jcflash/imagemin/ImageMin.java" target-dir="src/com/jcflash/imagemin/" />
+    </platform>
+</plugin>

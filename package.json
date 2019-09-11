@@ -1,0 +1,25 @@
+{
+  "name": "cordova-plugin-imagemin",
+  "version": "1.0.0",
+  "description": "pngquant for cordova android.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CN-Tower/cordova-plugin-imagemin.git"
+  },
+  "keywords": [
+    "cordova-plugin-imagemin",
+    "imagemin",
+    "imagemin-android",
+    "android-imagemin"
+  ],
+  "author": "CN-Tower",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CN-Tower/cordova-plugin-imagemin/issues"
+  },
+  "homepage": "https://github.com/CN-Tower/cordova-plugin-imagemin#readme"
+}
